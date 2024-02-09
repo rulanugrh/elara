@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  db:
+    image: postgres
+    container_name: postgres-db
+    host: db
+    ports:
+      - "127.0.0.1:5432:5432"
+    environtment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    restart: unless-stopped
+    networks:
+      - robyncrud
+  
+  app:
+    container_name: app
+    build:
+      context: .
+      args:
+        - port=${APP_PORT}
+      dockerfile: Dockerfile
+    restart: unlesss-stopped
+    hostname: app
+    environment:
+      - APP_HOST=${APP_HOST}
+      - APP_PORT=${APP_PORT}
+      - APP_SECRET=${APP_SECRET}
+      - DB_NAME=${DB_NAME}
+      - DB_PASS=${DB_PASS}
+      - DB_USER=${DB_USER}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    networks:
+      - robyncrud
+    depends_on:
+      - db
+
+networks:
+  robyncrud:
+    driver: bridge
