@@ -22,7 +22,7 @@ def GetConnection():
     SQLALCHEMY_DATABASE_URL = f"postgresql://{conf.DB_USER}:{conf.DB_PASS}@{conf.DB_HOST}:{conf.DB_PORT}/{conf.DB_NAME}"
     engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-    SessionLocal = sessionmaker(autocommit=false, autoflush=false, bind=engine)
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     base = declarative_base()
     Base = base
     
