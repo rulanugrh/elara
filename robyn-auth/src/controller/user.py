@@ -3,7 +3,7 @@ from config.config import *
 from repository import user
 import json
 
-user_router = SubRouter("/api/v1/user")
+user_router = SubRouter(__name__, prefix="/api/v1/user")
 sessionLocal = GetConnection()
 
 @user_router.post("/register")
