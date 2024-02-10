@@ -1,0 +1,4 @@
+robyn
+passlib[bcrypt]
+sqlalchemy
+python-jose[cryptography]
