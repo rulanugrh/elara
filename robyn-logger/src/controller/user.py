@@ -1,10 +1,20 @@
-from robyn import SubRouter
+from robyn import SubRouter, Request
 from config.config import *
 from repository import user
 import json
+from logging import Logger
 
 user_router = SubRouter(__name__, prefix="/api/v1/user")
 sessionLocal = GetConnection()
+logs = Logger(user_router)
+
+@user_router.before_request("/request")
+async def log_request_register(request: Request):
+    logs.info(f"Receive request from {request}")
+
+@user_router.before_request("/login")
+async def log_request_login(request: Request):
+    logs.info(f"Receive request from {request}")
 
 @user_router.post("/register")
 async def register(request):
