@@ -1,4 +1,4 @@
-This is example implementation about jwt in robyn with driver db postgresql
+This is example implementation about jwt in robyn with driver db postgresql and logger request
 
 ## Usage
 create database connection
